@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RailTicket - Pemesanan Tiket Kereta</title>
 
-    <!-- Bootstrap -->
+    <!-- bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Google Font -->
+    <!-- google font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
@@ -160,7 +160,7 @@
 </head>
 <body>
 
-    <!-- Navbar -->
+    <!-- navbar -->
     <nav class="navbar navbar-expand-lg sticky-top">
         <div class="container">
             <a class="navbar-brand" href="#">Triviliki</a>
@@ -191,7 +191,7 @@
         </div>
     </nav>
 
-    <!-- Hero -->
+    <!-- hero -->
     <section class="hero">
         <div class="container">
             <h1>Pesan Tiket Kereta Simple, Mudah, dan Premium</h1>
@@ -202,7 +202,7 @@
         </div>
     </section>
 
-    <!-- Booking Card -->
+    <!-- booking card -->
     <div class="container">
         <div class="card booking-card">
             <div class="booking-title">Cari Tiket Kereta</div>
@@ -256,7 +256,7 @@
         </div>
     </div>
 
-    <!-- Jadwal -->
+    <!-- jadwal -->
     <section class="py-5" id="jadwal">
         <div class="container text-center">
             <h2 class="section-title">Jadwal Kereta Tetap Setiap Hari</h2>
@@ -273,7 +273,7 @@
         </div>
     </section>
 
-    <!-- Features -->
+    <!-- fitur -->
     <section class="py-5" id="fitur">
         <div class="container">
             <h2 class="section-title text-center">Kenapa Pilih Triviliki?</h2>
@@ -303,7 +303,7 @@
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- footer -->
     <footer>
         <div class="container text-center">
             <p class="mb-0">tiket.... -Project PWD Pemesanan Tiket Kereta</p>
