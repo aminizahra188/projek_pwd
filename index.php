@@ -1,3 +1,7 @@
+<?php
+$stasiun = ["Jakarta (Gambir)", "Bandung", "Yogyakarta", "Surabaya", "Cirebon", "Semarang"];
+$jamList = ["05:00", "07:00", "09:00", "12:00", "15:00", "18:00", "20:00"];
+?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -62,53 +66,43 @@
             <div class="booking-title">Cari Tiket Kereta</div>
 
             <form action="form_pemesanan.php" method="POST">
-                <div class="row g-3">
-                    <div class="col-md-3">
-                        <select class="form-select" id="stasiunAsal" name="asal">
-                            <option selected disabled>Pilih Stasiun Asal</option>
-                            <option value="Stasiun 1">Jakarta</option>
-                            <option value="Stasiun 2">Bandung</option>
-                            <option value="Stasiun 3">Semarang</option>
-                            <option value="Stasiun 4">Yogyakarta</option>
-                            <option value="Stasiun 5">Surabaya</option>
-                            <option value="Stasiun 6">Malang</option>
-                        </select>
-                    </div>
+    <div class="row g-3">
 
-                    <div class="col-md-3">
-                        <select class="form-select" id="stasiunTujuan" name="tujuan">
-                            <option selected disabled>Pilih Stasiun Tujuan</option>
-                            <option value="Stasiun 1">Jakarta</option>
-                            <option value="Stasiun 2">Bandung</option>
-                            <option value="Stasiun 3">Semarang</option>
-                            <option value="Stasiun 4">Surabaya</option>
-                            <option value="Stasiun 5">Yogyakarta</option>
-                            <option value="Stasiun 6">Malang</option>
-                        </select>
-                    </div>
-
-                    <div class="col-md-3">
-                        <input type="date" class="form-control" name="tanggal">
-                    </div>
-
-                    <div class="col-md-3">
-                        <select class="form-select" name="jam">
-                            <option selected>Pilih Jam</option>
-                            <option>05:00</option>
-                            <option>07:00</option>
-                            <option>09:00</option>
-                            <option>12:00</option>
-                            <option>15:00</option>
-                            <option>18:00</option>
-                            <option>20:00</option>
-                        </select>
-                    </div>
-                </div>
-
-                <button type="submit" class="btn btn-search">Cari Tiket Sekarang</button> <!-- geser ke halaman form_pemesanan.php -->
-            </form>
+        <div class="col-md-3">
+            <select name="asal" id="stasiunAsal" class="form-select" required>
+                <option disabled selected>Pilih Stasiun Asal</option>
+                <?php foreach ($stasiun as $s) : ?>
+                    <option value="<?= $s ?>"><?= $s ?></option>
+                <?php endforeach; ?>
+            </select>
         </div>
+
+        <div class="col-md-3">
+            <select name="tujuan" id="stasiunTujuan" class="form-select" required>
+                <option disabled selected>Pilih Stasiun Tujuan</option>
+                <?php foreach ($stasiun as $s) : ?>
+                    <option value="<?= $s ?>"><?= $s ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+
+        <div class="col-md-3">
+            <input type="date" class="form-control" name="tanggal" required>
+        </div>
+
+        <div class="col-md-3">
+            <select class="form-select" name="jam" required>
+                <option disabled selected>Pilih Jam</option>
+                <?php foreach ($jamList as $jam) : ?>
+                <option value="<?= $jam ?>"><?= $jam ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+
     </div>
+
+    <button type="submit" class="btn btn-search">Cari Tiket Sekarang</button>
+</form>
 
     <!-- jadwal -->
     <section class="py-5" id="jadwal">
