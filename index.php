@@ -3,167 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RailTicket - Pemesanan Tiket Kereta</title>
+    <title>Rail Ticket - Pemesanan Tiket Kereta</title>
 
     <!-- bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
 
     <!-- google font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <style>
-        * {
-            font-family: 'Poppins', sans-serif;
-        }
-
-        body {
-            background: #f5f8ff;
-            color: #1f2937;
-        }
-
-        .navbar {
-            background: white;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.04);
-            padding: 16px 0;
-        }
-
-        .navbar-brand {
-            font-size: 28px;
-            font-weight: 800;
-            color: #0194f3 !important;
-        }
-
-        .nav-link {
-            font-weight: 500;
-            color: #374151 !important;
-            margin-left: 12px;
-        }
-
-        .btn-login {
-            border: 1px solid #0194f3;
-            color: #0194f3;
-            border-radius: 50px;
-            padding: 8px 20px;
-            font-weight: 600;
-        }
-
-        .btn-register {
-            background: #0194f3;
-            color: white;
-            border-radius: 50px;
-            padding: 9px 22px;
-            font-weight: 600;
-            box-shadow: 0 10px 20px rgba(1,148,243,0.18);
-        }
-
-        .hero {
-            background: linear-gradient(135deg, #0194f3, #2bbcff);
-            padding: 90px 0 170px;
-            color: white;
-        }
-
-        .hero h1 {
-            font-size: 52px;
-            font-weight: 800;
-            line-height: 1.2;
-        }
-
-        .hero p {
-            font-size: 18px;
-            margin-top: 15px;
-            max-width: 650px;
-        }
-
-        .booking-card {
-            margin-top: -90px;
-            border: none;
-            border-radius: 24px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
-            padding: 35px;
-        }
-
-        .booking-title {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 25px;
-        }
-
-        .form-control,
-        .form-select {
-            border-radius: 14px;
-            padding: 14px;
-            border: 1px solid #dbe4f0;
-        }
-
-        .btn-search {
-            background: #ff6d00;
-            color: white;
-            border: none;
-            padding: 14px;
-            border-radius: 14px;
-            font-weight: 700;
-            width: 100%;
-            margin-top: 18px;
-        }
-
-        .section-title {
-            font-size: 34px;
-            font-weight: 700;
-            margin-bottom: 35px;
-        }
-
-        .schedule-card {
-            background: white;
-            border-radius: 18px;
-            padding: 25px;
-            text-align: center;
-            font-weight: 700;
-            font-size: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-        }
-
-        .feature-card {
-            background: white;
-            border-radius: 22px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            height: 100%;
-        }
-
-        .feature-card h4 {
-            font-weight: 700;
-            margin-bottom: 12px;
-        }
-
-        .feature-card p {
-            color: #6b7280;
-            line-height: 1.7;
-        }
-
-        footer {
-            background: #0f172a;
-            color: white;
-            padding: 30px 0;
-            margin-top: 80px;
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 36px;
-            }
-
-            .booking-card {
-                padding: 25px;
-            }
-        }
-    </style>
 </head>
 <body>
 
     <!-- navbar -->
     <nav class="navbar navbar-expand-lg sticky-top">
         <div class="container">
-            <a class="navbar-brand" href="#">Triviliki</a>
+            <a class="navbar-brand" href="#">Matrain</a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -196,7 +50,7 @@
         <div class="container">
             <h1>Pesan Tiket Kereta Simple, Mudah, dan Premium</h1>
             <p>
-                Nikmatipengalaman booking tiket modern seperti platform tiket kereta profesional
+                Nikmati pengalaman booking tiket modern seperti platform tiket kereta profesional
                 dengan proses sederhana dan jadwal tetap setiap hari.
             </p>
         </div>
@@ -207,38 +61,38 @@
         <div class="card booking-card">
             <div class="booking-title">Cari Tiket Kereta</div>
 
-            <form>
+            <form action="form_pemesanan.php" method="POST">
                 <div class="row g-3">
                     <div class="col-md-3">
-                        <select class="form-select" id="stasiunAsal">
+                        <select class="form-select" id="stasiunAsal" name="asal">
                             <option selected disabled>Pilih Stasiun Asal</option>
-                            <option value="Stasiun 1">Stasiun 1</option>
-                            <option value="Stasiun 2">Stasiun 2</option>
-                            <option value="Stasiun 3">Stasiun 3</option>
-                            <option value="Stasiun 4">Stasiun 4</option>
-                            <option value="Stasiun 5">Stasiun 5</option>
-                            <option value="Stasiun 6">Stasiun 6</option>
+                            <option value="Stasiun 1">Jakarta</option>
+                            <option value="Stasiun 2">Bandung</option>
+                            <option value="Stasiun 3">Semarang</option>
+                            <option value="Stasiun 4">Yogyakarta</option>
+                            <option value="Stasiun 5">Surabaya</option>
+                            <option value="Stasiun 6">Malang</option>
                         </select>
                     </div>
 
                     <div class="col-md-3">
-                        <select class="form-select" id="stasiunTujuan">
+                        <select class="form-select" id="stasiunTujuan" name="tujuan">
                             <option selected disabled>Pilih Stasiun Tujuan</option>
-                            <option value="Stasiun 1">Stasiun 1</option>
-                            <option value="Stasiun 2">Stasiun 2</option>
-                            <option value="Stasiun 3">Stasiun 3</option>
-                            <option value="Stasiun 4">Stasiun 4</option>
-                            <option value="Stasiun 5">Stasiun 5</option>
-                            <option value="Stasiun 6">Stasiun 6</option>
+                            <option value="Stasiun 1">Jakarta</option>
+                            <option value="Stasiun 2">Bandung</option>
+                            <option value="Stasiun 3">Semarang</option>
+                            <option value="Stasiun 4">Surabaya</option>
+                            <option value="Stasiun 5">Yogyakarta</option>
+                            <option value="Stasiun 6">Malang</option>
                         </select>
                     </div>
 
                     <div class="col-md-3">
-                        <input type="date" class="form-control">
+                        <input type="date" class="form-control" name="tanggal">
                     </div>
 
                     <div class="col-md-3">
-                        <select class="form-select">
+                        <select class="form-select" name="jam">
                             <option selected>Pilih Jam</option>
                             <option>05:00</option>
                             <option>07:00</option>
@@ -251,7 +105,7 @@
                     </div>
                 </div>
 
-                <a href="form_pemesanan.php" class="btn btn-search">Cari Tiket Sekarang</a> <!-- geser ke halaman form_pemesanan.php -->
+                <button type="submit" class="btn btn-search">Cari Tiket Sekarang</button> <!-- geser ke halaman form_pemesanan.php -->
             </form>
         </div>
     </div>
