@@ -23,11 +23,11 @@ if (!$asal || !$tujuan || !$tanggal || !$jam) {
 
 <div class="container py-5">
 
-    <h2 class="text-center mb-4 title">Form Pemesanan Tiket</h2>
+    <h2 class="text-center mb-4">Form Pemesanan Tiket</h2>
 
-    <!-- DETAIL -->
-    <div class="card card-custom p-4 mb-4 detail-box">
-        <h5 class="mb-3">Detail Perjalanan</h5>
+    <!-- DETAIL PERJALANAN -->
+    <div class="card p-4 mb-4">
+        <h5>Detail Perjalanan</h5>
         <div class="row">
             <div class="col-md-3"><strong>Asal:</strong><br><?= $asal ?></div>
             <div class="col-md-3"><strong>Tujuan:</strong><br><?= $tujuan ?></div>
@@ -37,16 +37,16 @@ if (!$asal || !$tujuan || !$tanggal || !$jam) {
     </div>
 
     <!-- FORM -->
-    <div class="card card-custom p-4">
-        <form action="landing.php" method="POST">
+    <div class="card p-4">
+        <form action="proses_pemesanan.php" method="POST">
 
-            <!-- hidden -->
+            <!-- hidden kirim data -->
             <input type="hidden" name="asal" value="<?= $asal ?>">
             <input type="hidden" name="tujuan" value="<?= $tujuan ?>">
             <input type="hidden" name="tanggal" value="<?= $tanggal ?>">
             <input type="hidden" name="jam" value="<?= $jam ?>">
 
-            <h5 class="mb-3">Data Pemesan</h5>
+            <h5>Data Pemesan</h5>
 
             <div class="row">
                 <div class="col-md-6 mb-3">
@@ -60,17 +60,18 @@ if (!$asal || !$tujuan || !$tanggal || !$jam) {
                 </div>
             </div>
 
-            <h5 class="mt-3">Jumlah Tiket</h5>
+            <h5>Jumlah Tiket</h5>
 
             <div class="mb-3">
-                <input type="number" id="jumlah" name="jumlah" class="form-control" min="1" max="5" placeholder="Masukkan jumlah tiket" required>
+                <input type="number" id="jumlah" class="form-control" min="1" max="5"
+                placeholder="Masukkan jumlah tiket" required>
             </div>
 
-            <h5 class="mt-3">Data Penumpang</h5>
+            <h5>Data Penumpang & Kursi</h5>
 
             <div id="penumpangContainer"></div>
 
-            <button type="submit" class="btn btn-primary mt-3 w-100">
+            <button type="submit" class="btn btn-primary w-100 mt-3">
                 Pesan Sekarang
             </button>
 
@@ -83,8 +84,11 @@ if (!$asal || !$tujuan || !$tanggal || !$jam) {
 const jumlahInput = document.getElementById('jumlah');
 const container = document.getElementById('penumpangContainer');
 
+// daftar kursi
+const kursiList = ["A1","A2","A3","A4","B1","B2","B3","B4"];
+
 jumlahInput.addEventListener('input', function() {
-    let jumlah = parseInt(this.value);
+    let jumlah = parseInt(this.value) || 0;
 
     if (jumlah > 5) {
         alert("Maksimal 5 tiket!");
@@ -94,15 +98,23 @@ jumlahInput.addEventListener('input', function() {
 
     container.innerHTML = '';
 
-    if (jumlah > 0) {
-        for (let i = 1; i <= jumlah; i++) {
-            container.innerHTML += `
-                <div class="card p-3 mb-3 card-custom">
-                    <label class="mb-2"><strong>Penumpang ${i}</strong></label>
-                    <input type="text" name="penumpang[]" class="form-control" placeholder="Masukkan nama penumpang" required>
-                </div>
-            `;
-        }
+    for (let i = 1; i <= jumlah; i++) {
+
+        let options = kursiList.map(k => `<option value="${k}">${k}</option>`).join('');
+
+        container.innerHTML += `
+            <div class="card p-3 mb-3">
+                <label><strong>Penumpang ${i}</strong></label>
+
+                <input type="text" name="penumpang[]" class="form-control mb-2"
+                placeholder="Nama penumpang" required>
+
+                <select name="kursi[]" class="form-select" required>
+                    <option disabled selected>Pilih Kursi</option>
+                    ${options}
+                </select>
+            </div>
+        `;
     }
 });
 </script>
