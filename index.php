@@ -63,9 +63,9 @@ $jamList = ["05:00", "07:00", "09:00", "12:00", "15:00", "18:00", "20:00"];
     <!-- booking card -->
     <div class="container">
         <div class="card booking-card">
-            <div class="booking-title">Cari Tiket Kereta</div>
+            <div class="booking-title">Pesan Tiket Kereta</div>
 
-            <form action="form_pemesanan.php" method="POST">
+                <form action="form_pemesanan.php" method="POST">
     <div class="row g-3">
 
         <div class="col-md-3">
@@ -103,6 +103,8 @@ $jamList = ["05:00", "07:00", "09:00", "12:00", "15:00", "18:00", "20:00"];
 
     <button type="submit" class="btn btn-search">Cari Tiket Sekarang</button>
 </form>
+                </div>
+                </div>
 
     <!-- jadwal -->
     <section class="py-5" id="jadwal">
@@ -153,7 +155,7 @@ $jamList = ["05:00", "07:00", "09:00", "12:00", "15:00", "18:00", "20:00"];
 
     <!-- footer -->
     <footer>
-        <div class="container text-center">
+        <div class="container-fluid text-center">
             <p class="mb-0">tiket.... -Project PWD Pemesanan Tiket Kereta</p>
         </div>
     </footer>
