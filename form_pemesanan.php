@@ -1,12 +1,29 @@
 <?php
+include 'koneksi.php';
+
+// ambil data dari index
 $asal = $_POST['asal'] ?? '';
 $tujuan = $_POST['tujuan'] ?? '';
 $tanggal = $_POST['tanggal'] ?? '';
 $jam = $_POST['jam'] ?? '';
 
+// validasi akses
 if (!$asal || !$tujuan || !$tanggal || !$jam) {
     echo "<script>alert('Akses tidak valid!'); window.location='index.php';</script>";
     exit;
+}
+
+// ambil kursi yang sudah dipesan
+$kursi_terisi = [];
+
+$query = mysqli_query($conn, "
+    SELECT p.kursi FROM penumpang p
+    JOIN pemesanan pm ON p.id_pemesanan = pm.id
+    WHERE pm.tanggal='$tanggal' AND pm.jam='$jam'
+");
+
+while ($row = mysqli_fetch_assoc($query)) {
+    $kursi_terisi[] = $row['kursi'];
 }
 ?>
 
@@ -17,7 +34,10 @@ if (!$asal || !$tujuan || !$tanggal || !$jam) {
     <title>Form Pemesanan</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        
+    </style>
 </head>
 <body>
 
@@ -25,7 +45,7 @@ if (!$asal || !$tujuan || !$tanggal || !$jam) {
 
     <h2 class="text-center mb-4">Form Pemesanan Tiket</h2>
 
-    <!-- DETAIL PERJALANAN -->
+    <!-- DETAIL -->
     <div class="card p-4 mb-4">
         <h5>Detail Perjalanan</h5>
         <div class="row">
@@ -40,7 +60,7 @@ if (!$asal || !$tujuan || !$tanggal || !$jam) {
     <div class="card p-4">
         <form action="proses_pemesanan.php" method="POST">
 
-            <!-- hidden kirim data -->
+            <!-- hidden -->
             <input type="hidden" name="asal" value="<?= $asal ?>">
             <input type="hidden" name="tujuan" value="<?= $tujuan ?>">
             <input type="hidden" name="tanggal" value="<?= $tanggal ?>">
@@ -61,14 +81,12 @@ if (!$asal || !$tujuan || !$tanggal || !$jam) {
             </div>
 
             <h5>Jumlah Tiket</h5>
+            <input type="number" id="jumlah" name="jumlah" class="form-control mb-3" min="1" max="5" required>
 
-            <div class="mb-3">
-                <input type="number" id="jumlah" class="form-control" min="1" max="5"
-                placeholder="Masukkan jumlah tiket" required>
-            </div>
+            <h5>Pilih Kursi</h5>
+            <div id="kursiContainer" class="mb-4"></div>
 
-            <h5>Data Penumpang & Kursi</h5>
-
+            <h5>Data Penumpang</h5>
             <div id="penumpangContainer"></div>
 
             <button type="submit" class="btn btn-primary w-100 mt-3">
@@ -81,42 +99,70 @@ if (!$asal || !$tujuan || !$tanggal || !$jam) {
 </div>
 
 <script>
-const jumlahInput = document.getElementById('jumlah');
-const container = document.getElementById('penumpangContainer');
+const kursiTerisi = <?= json_encode($kursi_terisi) ?>;
 
-// daftar kursi
+const jumlahInput = document.getElementById('jumlah');
+const penumpangContainer = document.getElementById('penumpangContainer');
+const kursiContainer = document.getElementById('kursiContainer');
+
 const kursiList = ["A1","A2","A3","A4","B1","B2","B3","B4"];
 
-jumlahInput.addEventListener('input', function() {
-    let jumlah = parseInt(this.value) || 0;
+let selectedKursi = [];
 
-    if (jumlah > 5) {
-        alert("Maksimal 5 tiket!");
-        this.value = 5;
-        jumlah = 5;
+// tampilkan kursi
+kursiList.forEach(k => {
+    const div = document.createElement('div');
+    div.classList.add('kursi');
+    div.innerText = k;
+
+    // kursi terisi
+    if (kursiTerisi.includes(k)) {
+        div.classList.add('terisi');
+        kursiContainer.appendChild(div);
+        return;
     }
 
-    container.innerHTML = '';
+    div.addEventListener('click', function() {
+        let jumlah = parseInt(jumlahInput.value) || 0;
 
-    for (let i = 1; i <= jumlah; i++) {
+        if (jumlah === 0) {
+            alert("Isi jumlah tiket dulu!");
+            return;
+        }
 
-        let options = kursiList.map(k => `<option value="${k}">${k}</option>`).join('');
+        if (selectedKursi.includes(k)) {
+            selectedKursi = selectedKursi.filter(x => x !== k);
+            div.classList.remove('selected');
+        } else {
+            if (selectedKursi.length >= jumlah) {
+                alert("Jumlah kursi melebihi jumlah tiket!");
+                return;
+            }
 
-        container.innerHTML += `
+            selectedKursi.push(k);
+            div.classList.add('selected');
+        }
+
+        generatePenumpang();
+    });
+
+    kursiContainer.appendChild(div);
+});
+
+function generatePenumpang() {
+    penumpangContainer.innerHTML = '';
+
+    selectedKursi.forEach((k, i) => {
+        penumpangContainer.innerHTML += `
             <div class="card p-3 mb-3">
-                <label><strong>Penumpang ${i}</strong></label>
+                <label><strong>Penumpang ${i+1} - Kursi ${k}</strong></label>
 
-                <input type="text" name="penumpang[]" class="form-control mb-2"
-                placeholder="Nama penumpang" required>
-
-                <select name="kursi[]" class="form-select" required>
-                    <option disabled selected>Pilih Kursi</option>
-                    ${options}
-                </select>
+                <input type="hidden" name="kursi[]" value="${k}">
+                <input type="text" name="penumpang[]" class="form-control mt-2" placeholder="Nama penumpang" required>
             </div>
         `;
-    }
-});
+    });
+}
 </script>
 
 </body>
