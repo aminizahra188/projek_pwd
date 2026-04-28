@@ -69,6 +69,31 @@ INSERT INTO `penumpang` (`id`, `id_pemesanan`, `nama_penumpang`, `kursi`) VALUES
 -- Indexes for dumped tables
 --
 
+
+--
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+  `id` int(11) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Indexes for table `admin`
+--
+
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for table `admin`
+--
+
+ALTER TABLE `admin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- Indexes for table `pemesanan`
 --

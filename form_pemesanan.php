@@ -1,4 +1,11 @@
 <?php
+session_start();
+
+if ($_SESSION['status'] != "login") {
+    header("location:login.php");
+    exit;
+}
+
 include 'koneksi.php';
 
 // ambil data dari index
@@ -35,30 +42,61 @@ while ($row = mysqli_fetch_assoc($query)) {
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <style>
-        
-    </style>
+    <!-- css -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- google font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+
 </head>
 <body>
 
 <div class="container py-5">
 
-    <h2 class="text-center mb-4">Form Pemesanan Tiket</h2>
+    <div class="page-title">
+        <h2>Form Pemesanan Tiket</h2>
+    </div>
 
     <!-- DETAIL -->
-    <div class="card p-4 mb-4">
-        <h5>Detail Perjalanan</h5>
-        <div class="row">
-            <div class="col-md-3"><strong>Asal:</strong><br><?= $asal ?></div>
-            <div class="col-md-3"><strong>Tujuan:</strong><br><?= $tujuan ?></div>
-            <div class="col-md-3"><strong>Tanggal:</strong><br><?= $tanggal ?></div>
-            <div class="col-md-3"><strong>Jam:</strong><br><?= $jam ?></div>
+    <div class="detail-card mb-4">
+        <h4>Detail Perjalanan</h4>
+        <div class="row g-3">
+
+            <div class="col-md-3">
+                <div class="summary-box">
+                    <small>Stasiun Asal</small>
+                    <h6><?= $asal ?></h6>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="summary-box">
+                    <small>Stasiun Tujuan</small>
+                    <h6><?= $tujuan ?></h6>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="summary-box">
+                    <small>Tanggal Berangkat</small>
+                    <h6><?= $tanggal ?></h6>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="summary-box">
+                    <small>Jam Keberangkatan</small>
+                    <h6><?= $jam ?></h6>
+                </div>
+            </div>
+
         </div>
     </div>
 
     <!-- FORM -->
-    <div class="card p-4">
-        <form action="proses_pemesanan.php" method="POST">
+    <div class="main-booking-card">
+        <form id="bookingForm" action="proses_pemesanan.php" method="POST">
 
             <!-- hidden -->
             <input type="hidden" name="asal" value="<?= $asal ?>">
@@ -89,7 +127,7 @@ while ($row = mysqli_fetch_assoc($query)) {
             <h5>Data Penumpang</h5>
             <div id="penumpangContainer"></div>
 
-            <button type="submit" class="btn btn-primary w-100 mt-3">
+            <button type="submit" class="booking-btn mt-4">
                 Pesan Sekarang
             </button>
 
@@ -98,6 +136,7 @@ while ($row = mysqli_fetch_assoc($query)) {
 
 </div>
 
+<!-- script-->
 <script>
 const kursiTerisi = <?= json_encode($kursi_terisi) ?>;
 
@@ -163,6 +202,30 @@ function generatePenumpang() {
         `;
     });
 }
+
+const bookingForm = document.getElementById('bookingForm');
+
+bookingForm.addEventListener('submit', function(e) {
+    const jumlah = parseInt(jumlahInput.value) || 0;
+
+    if (jumlah === 0) {
+        e.preventDefault();
+        alert("Isi jumlah tiket terlebih dahulu!");
+        return;
+    }
+
+    if (selectedKursi.length !== jumlah) {
+        e.preventDefault();
+        alert("Jumlah kursi harus sesuai dengan jumlah tiket!");
+        return;
+    }
+
+    if (selectedKursi.length === 0) {
+        e.preventDefault();
+        alert("Silakan pilih kursi terlebih dahulu!");
+        return;
+    }
+});
 </script>
 
 </body>

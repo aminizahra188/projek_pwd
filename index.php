@@ -1,7 +1,10 @@
 <?php
+session_start();
+
 $stasiun = ["Jakarta (Gambir)", "Bandung", "Yogyakarta", "Surabaya", "Cirebon", "Semarang"];
 $jamList = ["05:00", "07:00", "09:00", "12:00", "15:00", "18:00", "20:00"];
 ?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -11,6 +14,8 @@ $jamList = ["05:00", "07:00", "09:00", "12:00", "15:00", "18:00", "20:00"];
 
     <!-- bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- css -->
     <link rel="stylesheet" href="css/style.css">
 
     <!-- google font -->
@@ -37,13 +42,41 @@ $jamList = ["05:00", "07:00", "09:00", "12:00", "15:00", "18:00", "20:00"];
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#fitur">Fitur</a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="data_pemesanan.php">                              
+                                Data Pemesanan
+                            </a>
+                        </li>
                     </li>
-                    <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
-                        <a href="login.php" class="btn btn-login">Login</a> <!-- button ke halaman login - login.php? (blm tau pake ap gk) -->
-                    </li>
-                    <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
-                        <a href="register.php" class="btn btn-register">Register</a> <!-- button ke halaman regist - register.php? (blm tau jg pake ap gk) -->
-                    </li>
+<?php if (isset($_SESSION['username'])) : ?>
+
+    <li class="nav-item ms-lg-3">
+        <span class="nav-link">
+            Halo, <?= $_SESSION['username']; ?>
+        </span>
+    </li>
+
+    <li class="nav-item ms-lg-2">
+        <a href="logout.php" class="btn btn-danger rounded-pill px-4">
+            Logout
+        </a>
+    </li>
+
+<?php else : ?>
+
+    <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+        <a href="login.php" class="btn btn-login">
+            Login
+        </a>
+    </li>
+
+    <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+        <a href="register.php" class="btn btn-register">
+            Register
+        </a>
+    </li>
+
+<?php endif; ?>
                 </ul>
             </div>
         </div>

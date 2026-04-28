@@ -1,4 +1,11 @@
 <?php
+session_start();
+
+if ($_SESSION['status'] != "login") {
+    header("location:login.php");
+    exit;
+}
+
 include 'koneksi.php';
 
 $asal = $_POST['asal'];
