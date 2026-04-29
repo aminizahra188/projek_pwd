@@ -65,6 +65,9 @@ if (!$data) {
         <?php endwhile; ?>
 
     </table>
+    </table>
+
+    <a href="index.php" class="btn btn-secondary mt-0">Kembali</a>
 </div>
 
 </body>
