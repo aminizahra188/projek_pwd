@@ -54,7 +54,7 @@ if (!$data) {
             <td><?= $d['tanggal'] ?></td>
             <td><?= $d['jam'] ?></td>
             <td>
-                <a href="edit.php?id=<?= $d['id'] ?>" class="btn btn-warning btn-sm">Edit</a>
+                <a href="edit_pemesanan.php?id=<?= $d['id'] ?>" class="btn btn-warning btn-sm">Edit</a>
                 <a href="hapus_pemesanan.php?id=<?= $d['id'] ?>" 
                    class="btn btn-danger btn-sm"
                    onclick="return confirm('Yakin mau hapus?')">
