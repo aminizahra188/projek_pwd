@@ -57,7 +57,7 @@ $update = mysqli_query($conn, "
 ");
 
 if ($update) {
-    echo "<script>alert('Upload bukti pembayaran berhasil!'); window.location='index.php';</script>";
+    echo "<script>alert('Upload bukti pembayaran berhasil!'); window.location='tiket.php?id=$id';</script>";
 } else {
     echo "<script>alert('Database error: " . mysqli_error($conn) . "'); window.location='upload_bukti.php?id=$id';</script>";
 }
