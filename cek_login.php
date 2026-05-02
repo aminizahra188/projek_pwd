@@ -12,12 +12,13 @@ $query = mysqli_query($conn, "
     AND password = '$password'
 ");
 
-$cek = mysqli_num_rows($query);
+$data = mysqli_fetch_assoc($query);
 
-if ($cek > 0) {
+if ($data) {
 
-    $_SESSION['username'] = $username;
+    $_SESSION['username'] = $data['username'];
     $_SESSION['status'] = "login";
+    $_SESSION['role'] = $data['role'];
 
     header("location:index.php");
 
