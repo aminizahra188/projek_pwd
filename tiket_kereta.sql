@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 01, 2026 at 12:58 PM
+-- Generation Time: May 02, 2026 at 06:56 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -30,15 +30,18 @@ SET time_zone = "+00:00";
 CREATE TABLE `admin` (
   `id` int(11) NOT NULL,
   `username` varchar(100) NOT NULL,
-  `password` varchar(100) NOT NULL
+  `password` varchar(100) NOT NULL,
+  `role` varchar(20) DEFAULT 'user'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`id`, `username`, `password`) VALUES
-(1, 'zahraa', '1234');
+INSERT INTO `admin` (`id`, `username`, `password`, `role`) VALUES
+(1, 'zahraa', '1234', 'admin'),
+(2, 'makpidemigod', 'projekpwd', 'admin'),
+(3, 'user1', 'projekpwd', 'user');
 
 -- --------------------------------------------------------
 
@@ -82,7 +85,11 @@ INSERT INTO `pemesanan` (`id`, `asal`, `tujuan`, `tanggal`, `jam`, `nama_pemesan
 (12, 'Surabaya', 'Yogyakarta', '2026-05-20', '20:00', 'zahra', 'amini@gmail.com', 'vip', 1, 75000, 75000, 'Transfer Bank', 'Belum Dibayar', NULL, 1),
 (13, 'Surabaya', 'Yogyakarta', '2026-05-20', '20:00', 'zahra', 'amini@gmail.com', 'vip', 1, 75000, 75000, 'Transfer Bank', 'Sudah Bayar', 'bukti_1777630183_2217.png', 1),
 (14, 'Bandung', 'Surabaya', '2026-06-03', '15:00', 'makfi', 'amini@gmail.com', 'ekonomi', 1, 200000, 200000, 'Transfer Bank', 'Belum Dibayar', NULL, 4),
-(15, 'Bandung', 'Surabaya', '2026-06-03', '15:00', 'makfi', 'amini@gmail.com', 'ekonomi', 1, 200000, 200000, 'Transfer Bank', 'Belum Dibayar', NULL, 4);
+(15, 'Bandung', 'Surabaya', '2026-06-03', '15:00', 'makfi', 'amini@gmail.com', 'ekonomi', 1, 200000, 200000, 'Transfer Bank', 'Belum Dibayar', NULL, 4),
+(18, 'Jakarta', 'Bandung', '2026-05-27', '05:00', 'charles', 'charles@gmail.com', 'vip', 1, 75000, 75000, 'E-Wallet', 'Sudah Bayar', 'bukti_1777695271_1395.png', 1),
+(19, 'Jakarta', 'Bandung', '2026-05-27', '05:00', 'charles', 'charles@gmail.com', 'vip', 1, 75000, 75000, 'QRIS', 'Belum Dibayar', NULL, 1),
+(20, 'Jakarta', 'Bandung', '2026-05-27', '05:00', 'charles', 'charles@gmail.com', 'vip', 1, 75000, 75000, 'QRIS', 'Belum Dibayar', NULL, 1),
+(21, 'Bandung', 'Yogyakarta', '2026-05-13', '12:00', 'charles', 'charles@gmail.com', 'vip', 1, 225000, 225000, 'QRIS', 'Sudah Bayar', 'bukti_1777696209_6125.png', 3);
 
 -- --------------------------------------------------------
 
@@ -118,7 +125,11 @@ INSERT INTO `penumpang` (`id`, `id_pemesanan`, `nama_penumpang`, `kursi`, `gerbo
 (15, 12, 'aku', 'A1', 'Gerbong 1'),
 (16, 13, 'aku', 'A1', 'Gerbong 1'),
 (17, 14, 'makfi', 'A1', 'Gerbong 2'),
-(18, 15, 'makfi', 'A1', 'Gerbong 1');
+(18, 15, 'makfi', 'A1', 'Gerbong 1'),
+(21, 18, 'charles', 'E3', 'Gerbong 2'),
+(22, 19, 'charles', 'E2', 'Gerbong 3'),
+(23, 20, 'charles', 'E2', 'Gerbong 3'),
+(24, 21, 'charles', 'A1', 'Gerbong 1');
 
 --
 -- Indexes for dumped tables
@@ -151,19 +162,19 @@ ALTER TABLE `penumpang`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `pemesanan`
 --
 ALTER TABLE `pemesanan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `penumpang`
 --
 ALTER TABLE `penumpang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- Constraints for dumped tables
