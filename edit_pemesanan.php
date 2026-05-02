@@ -1,6 +1,11 @@
 <?php
 include 'koneksi.php';
 
+if ($_SESSION['status'] != "login") {
+    header("location:login.php");
+    exit;
+}
+
 $id = $_GET['id'];
 
 // ambil data berdasarkan id
