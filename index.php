@@ -41,9 +41,11 @@ $jamList = ["05:00", "07:00", "09:00", "12:00", "15:00", "18:00", "20:00"];
                     <a class="nav-link" href="#fitur">Fitur</a>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="data_pemesanan.php">Data Pemesanan</a>
-                </li>
+                <?php if (isset($_SESSION['role']) && $_SESSION['role'] == 'admin') : ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="data_pemesanan.php">Data Pemesanan</a>
+                    </li>
+                <?php endif; ?>
 
                 <?php if (isset($_SESSION['username'])) : ?>
                     <li class="nav-item ms-lg-3">
