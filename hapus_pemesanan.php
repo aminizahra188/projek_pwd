@@ -7,10 +7,8 @@ if ($_SESSION['status'] != "login") {
     exit;
 }
 
-/*ambil id dari URL*/
 $id = $_GET['id'];
 
-/*hapus data penumpang abistu data pemesanan*/
 mysqli_query($conn, "
     DELETE FROM penumpang
     WHERE id_pemesanan = '$id'

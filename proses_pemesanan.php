@@ -2,10 +2,12 @@
 session_start();
 include 'koneksi.php';
 
-if ($_SESSION['status'] != "login") {
+if (!isset($_SESSION['status']) || $_SESSION['status'] != "login") {
     header("location:login.php");
     exit;
 }
+
+$username = $_SESSION['username'];
 
 $asal = $_POST['asal'];
 $tujuan = $_POST['tujuan'];
@@ -27,15 +29,13 @@ $harga_per_orang = $_POST['harga_satuan'];
 $jumlah = count($penumpang);
 $total_harga = $jumlah * $harga_per_orang;
 
-//insert pemesanan
 mysqli_query($conn, "INSERT INTO pemesanan 
-(asal, tujuan, tanggal, jam, kelas, jumlah, jarak, harga_per_orang, total_harga, metode_pembayaran, nama_pemesan, email)
+(username, asal, tujuan, tanggal, jam, kelas, jumlah, jarak, harga_per_orang, total_harga, metode_pembayaran, nama_pemesan, email, status_pembayaran, status_tiket)
 VALUES 
-('$asal','$tujuan','$tanggal','$jam','$kelas','$jumlah','$jarak','$harga_per_orang','$total_harga','$metode_pembayaran','$nama','$email')");
+('$username','$asal','$tujuan','$tanggal','$jam','$kelas','$jumlah','$jarak','$harga_per_orang','$total_harga','$metode_pembayaran','$nama','$email','Belum Bayar','Menunggu Konfirmasi')");
 
 $id = mysqli_insert_id($conn);
 
-//insert penumpang
 foreach ($penumpang as $i => $p) {
     $k = $kursi[$i];
 
@@ -45,6 +45,6 @@ foreach ($penumpang as $i => $p) {
     ('$id','$p','$k','$gerbong')");
 }
 
-//redirect ke tiket.php
 header("location:tiket.php?id=$id");
 exit;
+?>
