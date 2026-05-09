@@ -33,20 +33,24 @@ $data = mysqli_query($conn, "
 
     <h2 class="fw-bold mb-4">Tiket Saya</h2>
 
-    <?php if(mysqli_num_rows($data) == 0) : ?>
-
+    <?php if (mysqli_num_rows($data) == 0) : ?>
         <div class="alert alert-warning">
             Belum ada tiket untuk akun ini.
         </div>
-
     <?php endif; ?>
 
-    <?php while($d = mysqli_fetch_assoc($data)) : ?>
+    <?php while ($d = mysqli_fetch_assoc($data)) : ?>
+
+        <?php
+        $penumpang = mysqli_query($conn, "
+            SELECT * FROM penumpang
+            WHERE id_pemesanan='" . $d['id'] . "'
+        ");
+        ?>
 
         <div class="ticket-card">
 
             <div class="d-flex justify-content-between align-items-center mb-4">
-
                 <h3 class="route-title mb-0">
                     <?= $d['asal']; ?> → <?= $d['tujuan']; ?>
                 </h3>
@@ -54,7 +58,6 @@ $data = mysqli_query($conn, "
                 <span class="ticket-id">
                     ID #<?= $d['id']; ?>
                 </span>
-
             </div>
 
             <div class="row">
@@ -92,14 +95,14 @@ $data = mysqli_query($conn, "
                 <div class="col-md-3 info-box">
                     <small>Harga per Orang</small>
                     <h6>
-                        Rp <?= number_format($d['harga_per_orang'],0,',','.'); ?>
+                        Rp <?= number_format($d['harga_per_orang'], 0, ',', '.'); ?>
                     </h6>
                 </div>
 
                 <div class="col-md-3 info-box">
                     <small>Total Harga</small>
                     <h6>
-                        Rp <?= number_format($d['total_harga'],0,',','.'); ?>
+                        Rp <?= number_format($d['total_harga'], 0, ',', '.'); ?>
                     </h6>
                 </div>
 
@@ -111,40 +114,67 @@ $data = mysqli_query($conn, "
                 <div class="col-md-3 info-box">
                     <small>Status Pembayaran</small>
 
-                    <?php if($d['status_pembayaran'] == 'Pembayaran Dikonfirmasi') : ?>
-
+                    <?php if ($d['status_pembayaran'] == 'Pembayaran Dikonfirmasi') : ?>
                         <h6>
                             <span class="badge bg-success">
                                 Dikonfirmasi
                             </span>
                         </h6>
-
-                    <?php else : ?>
-
+                    <?php elseif ($d['status_pembayaran'] == 'Menunggu Konfirmasi') : ?>
                         <h6>
                             <span class="badge bg-warning text-dark">
                                 Menunggu Konfirmasi
                             </span>
                         </h6>
-
+                    <?php else : ?>
+                        <h6>
+                            <span class="badge bg-danger">
+                                Belum Bayar
+                            </span>
+                        </h6>
                     <?php endif; ?>
-
                 </div>
 
             </div>
 
             <div class="mt-4">
+                <h5 class="fw-bold mb-3">Data Penumpang</h5>
 
-                <?php if($d['status_pembayaran'] == 'Pembayaran Dikonfirmasi') : ?>
+                <div class="table-responsive">
+                    <table class="table table-bordered align-middle">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Penumpang</th>
+                                <th>Gerbong</th>
+                                <th>Kursi</th>
+                            </tr>
+                        </thead>
 
+                        <tbody>
+                            <?php 
+                            $no = 1;
+                            while ($p = mysqli_fetch_assoc($penumpang)) : 
+                            ?>
+                                <tr>
+                                    <td><?= $no++; ?></td>
+                                    <td><?= $p['nama_penumpang']; ?></td>
+                                    <td><?= $p['gerbong']; ?></td>
+                                    <td><?= $p['kursi']; ?></td>
+                                </tr>
+                            <?php endwhile; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <?php if ($d['status_pembayaran'] == 'Pembayaran Dikonfirmasi') : ?>
                 <?php else : ?>
-
                     <button class="btn btn-secondary" disabled>
                         Menunggu Konfirmasi Admin
                     </button>
-
                 <?php endif; ?>
-
             </div>
 
         </div>

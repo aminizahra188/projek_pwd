@@ -424,57 +424,61 @@ body {
     padding: 15px !important;
 }
 /* tiket saya */
-body{
-    background:#eef5ff;
-    font-family:Poppins, sans-serif;
-    }
+        body {
+            background: #eef5ff;
+            font-family: Poppins, sans-serif;
+        }
 
-.ticket-card{
-    background:rgb(179, 205, 231);
-    border-radius:22px;
-    padding:25px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.08);
-    margin-bottom:25px;
-    }
+        .ticket-card {
+            background: rgb(187, 201, 205);
+            border-radius: 22px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
 
-.ticket-id{
-    background:#0d6efd;
-    color:white;
-    padding:8px 16px;
-    border-radius:50px;
-    font-weight:700;
-    font-size:14px;
-    }
+        .ticket-id {
+            background: #0d6efd;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 14px;
+        }
 
-.info-box{
-    margin-bottom:18px;
-    }
+        .info-box {
+            margin-bottom: 18px;
+        }
 
-.info-box small{
-    color:#484b52;
-    display:block;
-    margin-bottom:4px;
-    }
+        .info-box small {
+            color: #6b7280;
+            display: block;
+            margin-bottom: 4px;
+        }
 
-.info-box h6{
-    margin:0;
-    font-weight:700;
-    }
+        .info-box h6 {
+            margin: 0;
+            font-weight: 700;
+        }
 
-.route-title{
-    font-weight:800;
-    }
+        .route-title {
+            font-weight: 800;
+        }
 
-.btn-ticket{
-    background:#0d6efd;
-    color:white;
-    border:none;
-    border-radius:12px;
-    padding:12px 20px;
-    font-weight:600;
-    }
+        .btn-ticket {
+            background: #0d6efd;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 12px 20px;
+            font-weight: 600;
+        }
 
-.btn-ticket:hover{
-    background:#0b5ed7;
-    color:white;
-    }
+        .btn-ticket:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+
+        .table th {
+            background: #dfe7ef;
+        }
