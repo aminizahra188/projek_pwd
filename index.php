@@ -20,7 +20,7 @@ $jamList = ["05:00", "07:00", "09:00", "12:00", "15:00", "18:00", "20:00"];
 
 <nav class="navbar navbar-expand-lg sticky-top custom-navbar">
     <div class="container">
-        <a class="navbar-brand brand-logo" href="#">🚆 Matrain</a>
+        <a class="navbar-brand brand-logo" href="#">Matrain</a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
@@ -64,7 +64,7 @@ $jamList = ["05:00", "07:00", "09:00", "12:00", "15:00", "18:00", "20:00"];
     <div class="hero-overlay"></div>
 
     <div class="container hero-content-full">
-        <span class="hero-badge">🚆 Perjalanan nyaman, sampai tujuan aman</span>
+        <span class="hero-badge">Perjalanan nyaman, sampai tujuan aman</span>
 
         <h1>
             Pesan Tiket Kereta
